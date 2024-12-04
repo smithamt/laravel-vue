@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --hover: rgba(0, 131, 163, 0.048);
+    --text: #1c2b33;
+    --cart: #ffffff;
+    --back: #f2f4f7;
+    --inactive-text: #868686;
+    --active-color: #0b78be;
+    --active-bg-color: #ebf5ff;
+    --active-color-hover: #d9eafc;
+    --inactive-btn: #e4e6eb;
+    --nav-color: #6e7074;
+    --nav-hover: #d8dadf;
+    --nav-bg: #e2e5e9;
+    --icon-bg: #e4e6eb;
+    --color1: #efe3f0;
+    --color2: #e9f6f3;
+    --color3: #eef6fd;
+    --popup-background: rgba(255, 255, 255, 0.4);
+    --loading-1: #f0f0f0;
+    --loading-2: #f8f8f8;
+    --loading-3: #f0f0f0;
+    --disable-nav-bg: #e4e6eb;
+}
+
+[data-theme="dark"] {
+    --hover: rgba(255, 255, 255, 0.05);
+    --text: #e4e6eb;
+    --cart: #242526;
+    --back: #1c1c1d;
+    --inactive-text: #b0b3b8;
+    --active-bg-color: #253950;
+    --active-color: #0b78be;
+    --active-color-hover: #3a4d63;
+    --inactive-btn: #505151;
+    --nav-color: #b0b3b8;
+    --nav-hover: #4e4f50;
+    --nav-bg: #3a3b3c;
+    --icon-bg: #3a3b3c;
+    --color1: #37352d;
+    --color2: #262f3f;
+    --color3: #2d3637;
+    --popup-background: rgba(0, 0, 0, 0.4);
+    --loading-1: #7b7e81;
+    --loading-2: #5c5e61;
+    --loading-3: #4d4f51;
+    --disable-nav-bg: #505151;
+}
+
+body {
+    background-image: linear-gradient(
+        -120deg,
+        var(--color1) 10%,
+        var(--color2) 50%,
+        var(--color3) 90%
+    );
+    background-color: var(--back);
+    color: var(--text);
+    font-size: 14px;
+    margin: 0;
+    overflow: hidden;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.cart-bg {
+  background-color: var(--cart);
+  color: var(--text);
+}
