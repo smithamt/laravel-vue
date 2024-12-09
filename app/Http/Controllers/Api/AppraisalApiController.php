@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Allowance;
+use App\Models\Appraisal;
 use Illuminate\Http\Request;
 
-class AllowanceApiController extends Controller
+class AppraisalApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,29 +14,29 @@ class AllowanceApiController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
+
     {
         $query = $request->input('query');
-
-        $allowances = Allowance::when($query, function ($q) use ($query) {
+        $appraisal = Appraisal::when($query, function ($q) use ($query) {
             $q->where('name', 'LIKE', "%{$query}%")
                 ->orWhere('keyword', 'LIKE', "%{$query}%")
-                ->orWhere('description', 'LIKE', "%{$query}%");
+                ->orWhere('description', 'LIKE', "%{$query}%")
+                ->select('employeeId')
+                ->paginate(10);
         })->paginate(10);
 
-        return response()->json($allowances);
+        return response()->json($appraisal);
     }
-
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreAllowanceRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        $allowance = Allowance::create($request->validated());
-        return response()->json($allowance, 201);
+        $appraisal = Appraisal::create($request->validated());
+        return response()->json($appraisal, 201);
     }
 
     /**
@@ -47,22 +47,22 @@ class AllowanceApiController extends Controller
      */
     public function show($id)
     {
-        $allowance = Allowance::findOrFail($id);
-        return response()->json($allowance);
+        $appraisal = Appraisal::findOrFail($id);
+        return response()->json($appraisal);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateAllowanceRequest  $request
+     * @param  \App\Http\Requests\UpdateAssetRequest  $request
      * @param  string  $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
-        $allowance = Allowance::findOrFail($id);
-        $allowance->update($request->validated());
-        return response()->json($allowance);
+        $appraisal = Appraisal::findOrFail($id);
+        $appraisal->update($request->validated());
+        return response()->json($appraisal);
     }
 
     /**
@@ -73,9 +73,9 @@ class AllowanceApiController extends Controller
      */
     public function destroy($id)
     {
-        $allowance = Allowance::findOrFail($id);
-        $allowance->isPublic = false;
-        $allowance->save();
+        $appraisal = Appraisal::findOrFail($id);
+        $appraisal->isPublic = false;
+        $appraisal->save();
         return response()->json(null, 204);
     }
 }

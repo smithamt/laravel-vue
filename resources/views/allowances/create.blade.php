@@ -1,73 +1,79 @@
 @extends('layouts.workspace')
 
 @section('content')
-<div class="w-full h-full p-4">
-    <div class="cart-bg p-4 rounded-lg">
-        <h1>Add New Allowance</h1>
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        <form action="{{ route('allowances.store') }}" method="POST" class="w-full h-full">
-            @csrf
-            <div class="grid lg:grid-cols-2 gap-2">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required>
-                    @error('name')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Create Allowance</h4>
                 </div>
-                <div class="mb-3">
-                    <label for="nickname" class="form-label">Nickname</label>
-                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Enter nickname">
-                    @error('nickname')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="allowanceId" class="form-label">Allowance ID</label>
-                    <input type="text" class="form-control" id="allowanceId" name="allowanceId" placeholder="Enter allowance ID" required>
-                    @error('allowanceId')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
-                    @error('email')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
-                    @error('username')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
-                    @error('password')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="positionId" class="form-label">Position ID</label>
-                    <input type="text" class="form-control" id="positionId" name="positionId" placeholder="Enter position ID">
-                    @error('positionId')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                <div class="card-body">
+                    <form action="{{ route('allowances.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="keyword">Keyword</label>
+                            <input type="text" name="keyword" class="form-control" id="keyword">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" class="form-control" id="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" name="amount" class="form-control" id="amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="minimumWorkingDaysPerMonth">Minimum Working Days Per Month</label>
+                            <input type="number" name="minimumWorkingDaysPerMonth" class="form-control" id="minimumWorkingDaysPerMonth">
+                        </div>
+                        <div class="form-group">
+                            <label for="frequency">Frequency</label>
+                            <select name="frequency" class="form-control" id="frequency" required>
+                                <option value="monthly">Monthly</option>
+                                <option value="yearly">Yearly</option>
+                                <option value="once">Once</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="isTaxable">Is Taxable</label>
+                            <input type="checkbox" name="isTaxable" id="isTaxable">
+                        </div>
+                        <div class="form-group">
+                            <label for="currencyId">Currency</label>
+                            <select name="currencyId" class="form-control" id="currencyId">
+                                <!-- Assuming you have a list of currencies to choose from -->
+                                @foreach ($currencies as $currency)
+                                <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ref">Reference</label>
+                            <input type="text" name="ref" class="form-control" id="ref">
+                        </div>
+                        <div class="form-group">
+                            <label for="isPublic">Is Public</label>
+                            <input type="checkbox" name="isPublic" id="isPublic">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyId">Company</label>
+                            <select name="companyId" class="form-control" id="companyId" required>
+                                <!-- Assuming you have a list of companies to choose from -->
+                                @foreach ($companies as $company)
+                                <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Add Allowance</button>
-        </form>
+        </div>
     </div>
 </div>
 @endsection

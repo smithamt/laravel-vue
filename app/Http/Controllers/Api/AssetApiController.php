@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Allowance;
+use App\Models\Asset;
+use App\Http\Requests\StoreAssetRequest;
+use App\Http\Requests\UpdateAssetRequest;
 use Illuminate\Http\Request;
 
-class AllowanceApiController extends Controller
+class AssetApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,29 +16,29 @@ class AllowanceApiController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
+
     {
         $query = $request->input('query');
-
-        $allowances = Allowance::when($query, function ($q) use ($query) {
+        $assets = Asset::paginate(10);
+        $assets = Asset::when($query, function ($q) use ($query) {
             $q->where('name', 'LIKE', "%{$query}%")
                 ->orWhere('keyword', 'LIKE', "%{$query}%")
                 ->orWhere('description', 'LIKE', "%{$query}%");
         })->paginate(10);
 
-        return response()->json($allowances);
+        return response()->json($assets);
     }
-
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreAllowanceRequest  $request
+     * @param  \App\Http\Requests\StoreAssetRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreAssetRequest $request)
     {
-        $allowance = Allowance::create($request->validated());
-        return response()->json($allowance, 201);
+        $asset = Asset::create($request->validated());
+        return response()->json($asset, 201);
     }
 
     /**
@@ -47,22 +49,22 @@ class AllowanceApiController extends Controller
      */
     public function show($id)
     {
-        $allowance = Allowance::findOrFail($id);
-        return response()->json($allowance);
+        $asset = Asset::findOrFail($id);
+        return response()->json($asset);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateAllowanceRequest  $request
+     * @param  \App\Http\Requests\UpdateAssetRequest  $request
      * @param  string  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAssetRequest $request, $id)
     {
-        $allowance = Allowance::findOrFail($id);
-        $allowance->update($request->validated());
-        return response()->json($allowance);
+        $asset = Asset::findOrFail($id);
+        $asset->update($request->validated());
+        return response()->json($asset);
     }
 
     /**
@@ -73,9 +75,9 @@ class AllowanceApiController extends Controller
      */
     public function destroy($id)
     {
-        $allowance = Allowance::findOrFail($id);
-        $allowance->isPublic = false;
-        $allowance->save();
+        $asset = Asset::findOrFail($id);
+        $asset->isPublic = false;
+        $asset->save();
         return response()->json(null, 204);
     }
 }

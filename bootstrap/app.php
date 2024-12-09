@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AuthCheck;
+use App\Http\Middleware\EmpApiAuth;
 use App\Http\Middleware\EmpAuthCheck;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // 
         $middleware->appendToGroup('auth', [AuthCheck::class]);
         $middleware->appendToGroup('emp.auth', [EmpAuthCheck::class]);
+        $middleware->appendToGroup('api.emp.auth', [EmpApiAuth::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

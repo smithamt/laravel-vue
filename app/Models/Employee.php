@@ -37,4 +37,24 @@ class Employee extends Model
             }
         });
     }
+
+    public function appraisals()
+    {
+        return $this->hasMany(Appraisal::class, 'employeeId');
+    }
+
+    public function createdAppraisals()
+    {
+        return $this->hasMany(Appraisal::class, 'createdById');
+    }
+
+    public function approvedAppraisals()
+    {
+        return $this->hasMany(Appraisal::class, 'approvedById');
+    }
+
+    public function reviewedAppraisals()
+    {
+        return $this->hasMany(Appraisal::class, 'reviewedById');
+    }
 }

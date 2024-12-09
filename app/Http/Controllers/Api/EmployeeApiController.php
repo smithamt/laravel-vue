@@ -14,12 +14,12 @@ class EmployeeApiController extends Controller
      */
     public function index(Request $request)
     {
-        $employees = Employee::paginate(10);
         $query = $request->input('query');
 
         // Search employees by name or employee ID
         $employees = Employee::where('name', 'LIKE', "%{$query}%")
             ->orWhere('employeeId', 'LIKE', "%{$query}%")
+            ->select('name', 'nickname', 'employeeId', 'id')
             ->paginate(10); // Adjust pagination as needed
 
         return response()->json($employees);

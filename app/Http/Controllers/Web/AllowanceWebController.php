@@ -3,52 +3,94 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Allowance;
+use App\Models\Company;
+use App\Models\Currency;
 use Illuminate\Http\Request;
 
 class AllowanceWebController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the allowances.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('allowances.index');
-    }
-
-    public function create()
-    {
-        return view('allowances.create');
+        $allowances = Allowance::paginate(10);
+        return view('allowances.index', compact('allowances'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the form for creating a new allowance.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $currencies = Currency::all();
+        $companies = Company::all();
+        return view('allowances.create', compact('currencies', 'companies'));
+    }
+
+    /**
+     * Store a newly created allowance in storage.
+     *
+     * @param  \App\Http\Requests\StoreAllowanceRequest  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        Allowance::create($request->validated());
+        return redirect()->route('allowances.index')->with('success', 'Allowance created successfully.');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified allowance.
+     *
+     * @param  \App\Models\Allowance  $allowance
+     * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show(Allowance $allowance)
     {
-        //
+        return view('allowances.show', compact('allowance'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Show the form for editing the specified allowance.
+     *
+     * @param  \App\Models\Allowance  $allowance
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function edit(Allowance $allowance)
     {
-        //
+        $currencies = Currency::all();
+        $companies = Company::all();
+        return view('allowances.edit', compact('currencies', 'companies', 'allowance'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Update the specified allowance in storage.
+     *
+     * @param  \App\Http\Requests\UpdateAllowanceRequest  $request
+     * @param  \App\Models\Allowance  $allowance
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function update(Request $request, Allowance $allowance)
     {
-        //
+        $allowance->update($request->validated());
+        return redirect()->route('allowances.index')->with('success', 'Allowance updated successfully.');
+    }
+
+    /**
+     * Remove the specified allowance from storage.
+     *
+     * @param  \App\Models\Allowance  $allowance
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Allowance $allowance)
+    {
+        $allowance->delete();
+        return redirect()->route('allowances.index')->with('success', 'Allowance deleted successfully.');
     }
 }
