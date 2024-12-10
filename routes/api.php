@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AppraisalApiController;
 use App\Http\Controllers\Api\AssetApiController;
 use App\Http\Controllers\Api\EmployeeApiController;
 use App\Http\Controllers\Api\HostelApiController;
+use App\Http\Controllers\Api\RoomApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,5 @@ Route::middleware('api.emp.auth')->group(function () {
     Route::apiResource('/assets', AssetApiController::class);
     Route::apiResource('/appraisals', AppraisalApiController::class);
     Route::apiResource('/hostels', HostelApiController::class);
+    Route::apiResource('/rooms', RoomApiController::class);
 });

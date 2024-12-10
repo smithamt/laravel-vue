@@ -18,7 +18,7 @@ class UpdateHostelRequest extends FormRequest
             'address' => 'required|string|max:255',
             'capacity' => 'required|integer',
             'companyId' => 'required|exists:companies,id',
-            'createdById' => 'required|exists:employees,id',
+            'created_by_id' => 'required|exists:employees,id',
         ];
     }
 }

@@ -21,11 +21,11 @@ class Allowance extends Model
         'minimumWorkingDaysPerMonth',
         'frequency',
         'isTaxable',
-        'currencyId',
+        'currency_id',
         'ref',
         'isPublic',
         'companyId',
-        'createdById'
+        'created_by_id'
     ];
 
     protected $casts = [
@@ -41,9 +41,9 @@ class Allowance extends Model
         return $this->hasOne(Color::class, 'contentId');
     }
 
-    public function createdBy()
+    public function created_by()
     {
-        return $this->belongsTo(Employee::class, 'createdById');
+        return $this->belongsTo(Employee::class, 'created_by_id');
     }
 
     public function company()
@@ -53,7 +53,7 @@ class Allowance extends Model
 
     public function currency()
     {
-        return $this->belongsTo(Currency::class, 'currencyId');
+        return $this->belongsTo(Currency::class, 'currency_id');
     }
 
     // Use UUIDs for primary keys

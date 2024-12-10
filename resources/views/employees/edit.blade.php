@@ -31,9 +31,9 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="employeeId" class="form-label">Employee ID</label>
-                <input type="text" class="form-control" id="employeeId" name="employeeId" value="{{ $employee->employeeId }}" required>
-                @error('employeeId')
+                <label for="employee_id" class="form-label">Employee ID</label>
+                <input type="text" class="form-control" id="employee_id" name="employee_id" value="{{ $employee->employee_id }}" required>
+                @error('employee_id')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -60,9 +60,9 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="positionId" class="form-label">Position ID</label>
-                <input type="number" class="form-control" id="positionId" name="positionId" value="{{ $employee->positionId }}">
-                @error('positionId')
+                <label for="position_id" class="form-label">Position ID</label>
+                <input type="number" class="form-control" id="position_id" name="position_id" value="{{ $employee->position_id }}">
+                @error('position_id')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>

@@ -8,25 +8,30 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::table('hostels', function (Blueprint $table) {
-            $table->char('companyId', 36)->collation('utf8mb4_bin')->change();
+        Schema::table('rooms', function (Blueprint $table) {
+            // Ensure the columns exist and have the correct types
             $table->char('created_by_id', 36)->collation('utf8mb4_bin')->change();
 
-            $table->foreign('companyId')->references('id')->on('companies')->onDelete('cascade');
+            // Add foreign key constraints
             $table->foreign('created_by_id')->references('id')->on('employees')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::table('hostels', function (Blueprint $table) {
-            $table->dropForeign(['companyId']);
+        Schema::table('rooms', function (Blueprint $table) {
+            // Drop foreign key constraints
+            $table->dropForeign(['hostelId']);
             $table->dropForeign(['created_by_id']);
         });
     }

@@ -21,11 +21,11 @@ class UpdateAllowanceRequest extends FormRequest
             'minimumWorkingDaysPerMonth' => 'nullable|integer',
             'frequency' => 'required|in:monthly,yearly,once',
             'isTaxable' => 'boolean',
-            'currencyId' => 'nullable|exists:currencies,id',
+            'currency_id' => 'nullable|exists:currencies,id',
             'ref' => 'nullable|string|max:255',
             'isPublic' => 'boolean',
             'companyId' => 'required|exists:companies,id',
-            'createdById' => 'required|exists:employees,id',
+            'created_by_id' => 'required|exists:employees,id',
         ];
     }
 }

@@ -17,7 +17,7 @@ class HostelApiController extends Controller
      */
     public function index()
     {
-        $hostels = Hostel::with('company', 'createdBy', 'rooms')->paginate(10);
+        $hostels = Hostel::with('company', 'created_by', 'rooms')->paginate(10);
         return response()->json($hostels);
     }
 
@@ -35,18 +35,21 @@ class HostelApiController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        // Log the authenticated user's information
-        Log::info('User', ['user' => $user->toArray()]);
+        $edit = $request->edit;
+        if ($edit) {
+            $hostel = Hostel::findOrFail($edit);
+            $hostel->update($request->validated());
+            return response()->json($hostel);
+        }
 
         // Merge the validated request data with additional fields
         $data = array_merge($request->validated(), [
             'companyId' => $user->companyId,
-            'createdById' => $user->id,
+            'created_by_id' => $user->id,
         ]);
 
         // Create and save the hostel
         $hostel = Hostel::create($data);
-
         return response()->json($hostel, 201);
     }
 
@@ -59,9 +62,14 @@ class HostelApiController extends Controller
      */
     public function show($id)
     {
-        $hostel = Hostel::with('company', 'createdBy', 'rooms')->findOrFail($id);
+        $hostel = Hostel::with(['created_by' => function ($query) {
+            $query->select('id', 'name', 'nickname', 'employee_id');
+        }, 'rooms' => function ($query) {
+            $query->select('id', 'roomNumber', 'hostelId'); // Ensure to select the foreign key 'hostelId' 
+        }])->findOrFail($id);
         return response()->json($hostel);
     }
+
 
     /**
      * Update the specified resource in storage.

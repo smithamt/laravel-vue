@@ -18,7 +18,7 @@ class Hostel extends Model
         'address',
         'capacity',
         'companyId',
-        'createdById'
+        'created_by_id'
     ];
 
     protected $casts = [
@@ -30,9 +30,9 @@ class Hostel extends Model
         return $this->belongsTo(Company::class, 'companyId');
     }
 
-    public function createdBy()
+    public function created_by()
     {
-        return $this->belongsTo(Employee::class, 'createdById');
+        return $this->belongsTo(Employee::class, 'created_by_id');
     }
 
     public function rooms()

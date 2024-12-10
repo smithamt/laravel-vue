@@ -19,7 +19,7 @@ class StoreAssetRequest extends FormRequest
             'type' => 'nullable|string|max:255',
             'forAll' => 'boolean',
             'amount' => 'nullable|numeric',
-            'currencyId' => 'nullable|exists:currencies,id',
+            'currency_id' => 'nullable|exists:currencies,id',
             'ref' => 'nullable|string|max:255',
             'condition' => 'nullable|string|max:255',
             'lifecycle' => 'nullable|string|max:255',
@@ -28,9 +28,9 @@ class StoreAssetRequest extends FormRequest
             'maintenanceSchedule' => 'nullable|string|max:255',
             'assetPerformance' => 'nullable|string|max:255',
             'auditInformation' => 'nullable|string|max:255',
-            'departmentId' => 'nullable|exists:departments,id',
+            'department_id' => 'nullable|exists:departments,id',
             'isPublic' => 'boolean',
-            'createdById' => 'required|exists:employees,id',
+            'created_by_id' => 'required|exists:employees,id',
             'companyId' => 'required|exists:companies,id',
         ];
     }

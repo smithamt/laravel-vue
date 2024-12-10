@@ -15,13 +15,64 @@ class Employee extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'nickname', 'employeeId', 'email', 'username', 'password', 'positionId', 'departmentId', 'branchId', 'nationalityId', 'salary', 'salaryType', 'currencyId', 'roleId', 'gender', 'maritalStatusId', 'levelOfEducationId', 'ethnicGroupId', 'height', 'weight', 'contactNo', 'passportNo', 'idCardNo', 'emergencyContact', 'emergencyCall', 'channels', 'languageId', 'degreeOfVision', 'hearingLevel', 'currentAddress', 'permanentAddress'];
-
-    // Optionally, you can also hash the password before saving
-    // public function setPasswordAttribute($value)
-    // {
-    //     $this->attributes['password'] = bcrypt($value);
-    // }
+    protected $fillable = [
+        'id',
+        'name',
+        'nickname',
+        'employee_id',
+        'date_of_birth',
+        'nationality_id',
+        'position_id',
+        'joined_date',
+        'probation_month',
+        'fingerprintId',
+        'username',
+        'password',
+        'department_id',
+        'branch_id',
+        'scheduleId',
+        'salary',
+        'salary_type',
+        'currency_id',
+        'serviceHourPerDay',
+        'safeLate',
+        'safeEarlyOut',
+        'useFlexibleWorkingHour',
+        'onHoldSalary',
+        'email',
+        'contact_no',
+        'telegram',
+        'gender',
+        'permanent_address',
+        'current_address',
+        'passport_no',
+        'height',
+        'weight',
+        'emergencyContact',
+        'emergencyCall',
+        'degreeOfVision',
+        'hearingLevel',
+        'channels',
+        'idCardNo',
+        'role',
+        'ref',
+        'levelOfEducation',
+        'ethnicGroup',
+        'computerSkill',
+        'languages',
+        'anyCriminalHistory',
+        'state',
+        'is_public',
+        'company_id',
+        'created_by_id',
+        'created_at',
+        'updated_at',
+        'marital_status_id',
+        'employee_type_id',
+        'last_promotion_date',
+        'language',
+        'room_id'
+    ];
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -40,12 +91,12 @@ class Employee extends Model
 
     public function appraisals()
     {
-        return $this->hasMany(Appraisal::class, 'employeeId');
+        return $this->hasMany(Appraisal::class, 'employee_id');
     }
 
     public function createdAppraisals()
     {
-        return $this->hasMany(Appraisal::class, 'createdById');
+        return $this->hasMany(Appraisal::class, 'created_by_id');
     }
 
     public function approvedAppraisals()

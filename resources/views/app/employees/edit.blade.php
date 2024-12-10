@@ -15,8 +15,8 @@
             <input type="text" class="form-control" id="nickname" name="nickname" value="{{ $employee->nickname }}">
         </div>
         <div class="mb-3">
-            <label for="employeeId" class="form-label">Employee ID</label>
-            <input type="text" class="form-control" id="employeeId" name="employeeId" value="{{ $employee->employeeId }}" required>
+            <label for="employee_id" class="form-label">Employee ID</label>
+            <input type="text" class="form-control" id="employee_id" name="employee_id" value="{{ $employee->employee_id }}" required>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
@@ -32,8 +32,8 @@
             <small>Leave blank to keep the current password</small>
         </div>
         <div class="mb-3">
-            <label for="positionId" class="form-label">Position ID</label>
-            <input type="number" class="form-control" id="positionId" name="positionId" value="{{ $employee->positionId }}" required>
+            <label for="position_id" class="form-label">Position ID</label>
+            <input type="number" class="form-control" id="position_id" name="position_id" value="{{ $employee->position_id }}" required>
         </div>
         <button type="submit" class="btn btn-primary">Update Employee</button>
     </form>

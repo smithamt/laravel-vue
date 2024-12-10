@@ -16,8 +16,8 @@
                     <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Enter nickname">
                 </div>
                 <div class="mb-3">
-                    <label for="employeeId" class="form-label">Employee ID</label>
-                    <input type="text" class="form-control" id="employeeId" name="employeeId" placeholder="Enter employee ID" required>
+                    <label for="employee_id" class="form-label">Employee ID</label>
+                    <input type="text" class="form-control" id="employee_id" name="employee_id" placeholder="Enter employee ID" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -32,8 +32,8 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
                 </div>
                 <div class="mb-3">
-                    <label for="positionId" class="form-label">Position ID</label>
-                    <input type="text" class="form-control" id="positionId" name="positionId" placeholder="Enter position ID">
+                    <label for="position_id" class="form-label">Position ID</label>
+                    <input type="text" class="form-control" id="position_id" name="position_id" placeholder="Enter position ID">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Add Employee</button>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\UuidHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,7 +18,7 @@ class Room extends Model
         'capacity',
         'hostelId',
         'isOccupied',
-        'createdById'
+        'created_by_id'
     ];
 
     protected $casts = [
@@ -31,9 +32,14 @@ class Room extends Model
         return $this->belongsTo(Hostel::class, 'hostelId');
     }
 
-    public function createdBy()
+    public function employees()
     {
-        return $this->belongsTo(Employee::class, 'createdById');
+        return $this->hasMany(Employee::class, 'room_id');
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(Employee::class, 'created_by_id');
     }
 
     protected static function boot()
@@ -42,7 +48,7 @@ class Room extends Model
 
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = (string) \Illuminate\Support\Str::uuid();
+                $model->{$model->getKeyName()} = UuidHelper::generateObjectId();
             }
         });
     }

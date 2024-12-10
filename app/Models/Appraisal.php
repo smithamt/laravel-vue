@@ -14,7 +14,7 @@ class Appraisal extends Model
 
     protected $fillable = [
         'id',
-        'employeeId',
+        'employee_id',
         'status',
         'approvedById',
         'reviewedById',
@@ -23,8 +23,8 @@ class Appraisal extends Model
         'state',
         'isPublic',
         'companyId',
-        'departmentId',
-        'createdById'
+        'department_id',
+        'created_by_id'
     ];
 
     protected $casts = [
@@ -34,12 +34,12 @@ class Appraisal extends Model
 
     public function employee()
     {
-        return $this->belongsTo(Employee::class, 'employeeId');
+        return $this->belongsTo(Employee::class, 'employee_id');
     }
 
-    public function createdBy()
+    public function created_by()
     {
-        return $this->belongsTo(Employee::class, 'createdById');
+        return $this->belongsTo(Employee::class, 'created_by_id');
     }
 
     public function approvedBy()
@@ -54,7 +54,7 @@ class Appraisal extends Model
 
     public function department()
     {
-        return $this->belongsTo(Department::class, 'departmentId');
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
     public function company()

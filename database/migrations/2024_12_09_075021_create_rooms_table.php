@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHostels extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateHostels extends Migration
      */
     public function up()
     {
-        Schema::create('hostels', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('address');
+        Schema::create('rooms', function (Blueprint $table) {
+            $table->char('id', 36)->collation('utf8mb4_bin')->primary();
+            $table->string('roomNumber');
             $table->integer('capacity');
-            $table->uuid('companyId',);
-            $table->uuid('created_by_id',);
+            $table->uuid('hostelId');
+            $table->boolean('isOccupied')->default(false);
+            $table->uuid('created_by_id');
             $table->timestamps();
+
+            // Foreign key constraints
         });
     }
 
@@ -31,6 +33,6 @@ class CreateHostels extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hostels');
+        Schema::dropIfExists('rooms');
     }
-}
+};

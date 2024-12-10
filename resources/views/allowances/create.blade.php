@@ -44,8 +44,8 @@
                             <input type="checkbox" name="isTaxable" id="isTaxable">
                         </div>
                         <div class="form-group">
-                            <label for="currencyId">Currency</label>
-                            <select name="currencyId" class="form-control" id="currencyId">
+                            <label for="currency_id">Currency</label>
+                            <select name="currency_id" class="form-control" id="currency_id">
                                 <!-- Assuming you have a list of currencies to choose from -->
                                 @foreach ($currencies as $currency)
                                 <option value="{{ $currency->id }}">{{ $currency->name }}</option>

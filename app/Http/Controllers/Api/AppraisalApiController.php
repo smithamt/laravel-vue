@@ -21,7 +21,7 @@ class AppraisalApiController extends Controller
             $q->where('name', 'LIKE', "%{$query}%")
                 ->orWhere('keyword', 'LIKE', "%{$query}%")
                 ->orWhere('description', 'LIKE', "%{$query}%")
-                ->select('employeeId')
+                ->select('employee_id')
                 ->paginate(10);
         })->paginate(10);
 

@@ -60,7 +60,7 @@
                         </tr>
                         <tr>
                             <th>Created By</th>
-                            <td>{{ $allowance->createdBy ? $allowance->createdBy->name : 'N/A' }}</td>
+                            <td>{{ $allowance->created_by ? $allowance->created_by->name : 'N/A' }}</td>
                         </tr>
                         <tr>
                             <th>Created At</th>

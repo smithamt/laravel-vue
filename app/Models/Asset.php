@@ -19,7 +19,7 @@ class Asset extends Model
         'type',
         'forAll',
         'amount',
-        'currencyId',
+        'currency_id',
         'ref',
         'condition',
         'lifecycle',
@@ -29,9 +29,9 @@ class Asset extends Model
         'maintenanceSchedule',
         'assetPerformance',
         'auditInformation',
-        'departmentId',
+        'department_id',
         'isPublic',
-        'createdById',
+        'created_by_id',
         'companyId'
     ];
 
@@ -44,17 +44,17 @@ class Asset extends Model
 
     public function currency()
     {
-        return $this->belongsTo(Currency::class, 'currencyId');
+        return $this->belongsTo(Currency::class, 'currency_id');
     }
 
     public function department()
     {
-        return $this->belongsTo(Department::class, 'departmentId');
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
-    public function createdBy()
+    public function created_by()
     {
-        return $this->belongsTo(Employee::class, 'createdById');
+        return $this->belongsTo(Employee::class, 'created_by_id');
     }
 
     public function company()
@@ -64,7 +64,7 @@ class Asset extends Model
 
     public function departments()
     {
-        return $this->belongsToMany(Department::class, 'asset_department', 'assetId', 'departmentId')->as('departments');
+        return $this->belongsToMany(Department::class, 'asset_department', 'assetId', 'department_id')->as('departments');
     }
 
     protected $keyType = 'string';
