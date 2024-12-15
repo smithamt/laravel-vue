@@ -10,7 +10,7 @@ Home
     <div class="card" style="width: 18rem;">
         <img src="https://blog.usetada.com/hs-fs/hubfs/Mengenal%20Employee%20Perks%20dan%20Benefitnya%20untuk%20Karyawan.jpg?width=2501&name=Mengenal%20Employee%20Perks%20dan%20Benefitnya%20untuk%20Karyawan.jpg" class="card-img-top" alt="...">
         <div class="card-body space-y-4">
-            <h5 class="card-title font-bold text-lg">Total Employee {{ $employeeCount }}</h5>
+            <h5 class="card-title font-bold text-lg">Total Employees {{ $employeeCount }}</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <a href="/employees/create" class="btn btn-primary">Create New Employee</a>
         </div>

@@ -6,40 +6,34 @@ use App\Helpers\UuidHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class EmployeeRoom extends Model
 {
     use HasFactory;
 
-    protected $table = 'rooms';
+    protected $table = 'employee_rooms';
 
     protected $fillable = [
         'id',
-        'roomNumber',
-        'capacity',
-        'hostel_id',
-        'isOccupied',
-        'created_by_id'
+        'room_id',
+        'starting_date',
+        'created_by_id',
+        'is_public',
     ];
 
     protected $casts = [
         'id' => 'string',
-        'capacity' => 'integer',
-        'isOccupied' => 'boolean',
+        'room_id' => 'string',
+        'starting_date' => 'date',
     ];
 
-    public function hostel()
+    public function employee()
     {
-        return $this->belongsTo(Hostel::class, 'hostel_id');
+        return $this->belongsTo(Employee::class, 'id');
     }
 
-    public function employees()
+    public function room()
     {
-        return $this->hasMany(EmployeeRoom::class, 'room_id');
-    }
-
-    public function created_by()
-    {
-        return $this->belongsTo(Employee::class, 'created_by_id');
+        return $this->belongsTo(Room::class, 'room_id');
     }
 
     protected static function boot()

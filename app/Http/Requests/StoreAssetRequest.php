@@ -31,7 +31,7 @@ class StoreAssetRequest extends FormRequest
             'department_id' => 'nullable|exists:departments,id',
             'isPublic' => 'boolean',
             'created_by_id' => 'required|exists:employees,id',
-            'companyId' => 'required|exists:companies,id',
+            'company_id' => 'required|exists:companies,id',
         ];
     }
 }

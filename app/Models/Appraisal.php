@@ -22,7 +22,7 @@ class Appraisal extends Model
         'refId',
         'state',
         'isPublic',
-        'companyId',
+        'company_id',
         'department_id',
         'created_by_id'
     ];
@@ -59,7 +59,7 @@ class Appraisal extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class, 'companyId');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function plans()

@@ -19,6 +19,17 @@ Route::middleware('api.emp.auth')->group(function () {
     Route::apiResource('/allowances', AllowanceApiController::class);
     Route::apiResource('/assets', AssetApiController::class);
     Route::apiResource('/appraisals', AppraisalApiController::class);
+
+    //hostels
     Route::apiResource('/hostels', HostelApiController::class);
+    Route::get('/hostels/{hostelId}/employees', [HostelApiController::class, 'getEmployees']);
+
+    //rooms
     Route::apiResource('/rooms', RoomApiController::class);
+    Route::get('/rooms/{roomId}/employees', [RoomApiController::class, 'getEmployees']);
+    Route::post('/rooms/import', [RoomApiController::class, 'importRooms']);
+    Route::post('/room-employees/import', [RoomApiController::class, 'importEmployees']);
+    Route::post('/rooms/{roomId}/add-employees', [RoomApiController::class, 'addEmployees']);
+    Route::post('/rooms/{roomId}/add-employee', [RoomApiController::class, 'addEmployee']);
+    Route::delete('/employee-rooms/{employeeRoomId}', [RoomApiController::class, 'removeEmployee']);
 });

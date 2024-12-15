@@ -18,7 +18,7 @@ class CreateHostels extends Migration
             $table->string('name');
             $table->string('address');
             $table->integer('capacity');
-            $table->uuid('companyId',);
+            $table->uuid('company_id',);
             $table->uuid('created_by_id',);
             $table->timestamps();
         });

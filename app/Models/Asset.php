@@ -32,7 +32,7 @@ class Asset extends Model
         'department_id',
         'isPublic',
         'created_by_id',
-        'companyId'
+        'company_id'
     ];
 
     protected $casts = [
@@ -59,7 +59,7 @@ class Asset extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class, 'companyId');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function departments()

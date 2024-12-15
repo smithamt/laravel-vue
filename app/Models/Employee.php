@@ -31,43 +31,19 @@ class Employee extends Model
         'department_id',
         'branch_id',
         'scheduleId',
-        'salary',
-        'salary_type',
-        'currency_id',
-        'serviceHourPerDay',
-        'safeLate',
-        'safeEarlyOut',
-        'useFlexibleWorkingHour',
-        'onHoldSalary',
         'email',
         'contact_no',
         'telegram',
         'gender',
-        'permanent_address',
-        'current_address',
-        'passport_no',
-        'height',
-        'weight',
-        'emergencyContact',
-        'emergencyCall',
-        'degreeOfVision',
-        'hearingLevel',
-        'channels',
         'idCardNo',
         'role',
         'ref',
-        'levelOfEducation',
-        'ethnicGroup',
-        'computerSkill',
-        'languages',
-        'anyCriminalHistory',
         'state',
         'is_public',
         'company_id',
         'created_by_id',
         'created_at',
         'updated_at',
-        'marital_status_id',
         'employee_type_id',
         'last_promotion_date',
         'language',
@@ -87,6 +63,11 @@ class Employee extends Model
                 $model->{$model->getKeyName()} = UuidHelper::generateObjectId();
             }
         });
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'image_id');
     }
 
     public function appraisals()

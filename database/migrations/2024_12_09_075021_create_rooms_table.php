@@ -17,7 +17,7 @@ return new class extends Migration
             $table->char('id', 36)->collation('utf8mb4_bin')->primary();
             $table->string('roomNumber');
             $table->integer('capacity');
-            $table->uuid('hostelId');
+            $table->uuid('hostel_id');
             $table->boolean('isOccupied')->default(false);
             $table->uuid('created_by_id');
             $table->timestamps();

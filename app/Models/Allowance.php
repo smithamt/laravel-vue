@@ -24,7 +24,7 @@ class Allowance extends Model
         'currency_id',
         'ref',
         'isPublic',
-        'companyId',
+        'company_id',
         'created_by_id'
     ];
 
@@ -48,7 +48,7 @@ class Allowance extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class, 'companyId');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function currency()

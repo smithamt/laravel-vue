@@ -17,7 +17,7 @@ class Hostel extends Model
         'name',
         'address',
         'capacity',
-        'companyId',
+        'company_id',
         'created_by_id'
     ];
 
@@ -27,7 +27,7 @@ class Hostel extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class, 'companyId');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function created_by()
@@ -37,7 +37,7 @@ class Hostel extends Model
 
     public function rooms()
     {
-        return $this->hasMany(Room::class, 'hostelId');
+        return $this->hasMany(Room::class, 'hostel_id');
     }
 
     protected static function boot()

@@ -24,7 +24,7 @@ class UpdateAllowanceRequest extends FormRequest
             'currency_id' => 'nullable|exists:currencies,id',
             'ref' => 'nullable|string|max:255',
             'isPublic' => 'boolean',
-            'companyId' => 'required|exists:companies,id',
+            'company_id' => 'required|exists:companies,id',
             'created_by_id' => 'required|exists:employees,id',
         ];
     }

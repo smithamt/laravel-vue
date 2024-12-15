@@ -61,8 +61,8 @@
                             <input type="checkbox" name="isPublic" id="isPublic">
                         </div>
                         <div class="form-group">
-                            <label for="companyId">Company</label>
-                            <select name="companyId" class="form-control" id="companyId" required>
+                            <label for="company_id">Company</label>
+                            <select name="company_id" class="form-control" id="company_id" required>
                                 <!-- Assuming you have a list of companies to choose from -->
                                 @foreach ($companies as $company)
                                 <option value="{{ $company->id }}">{{ $company->name }}</option>

@@ -31,7 +31,7 @@ return new class extends Migration
     {
         Schema::table('rooms', function (Blueprint $table) {
             // Drop foreign key constraints
-            $table->dropForeign(['hostelId']);
+            $table->dropForeign(['hostel_id']);
             $table->dropForeign(['created_by_id']);
         });
     }

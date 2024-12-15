@@ -3,10 +3,28 @@
 namespace App\Models;
 
 use App\Helpers\UuidHelper;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
+    use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'path',
+        'description',
+    ];
+
+    protected $casts = [
+        'id' => 'string',
+    ];
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'image_id');
+    }
+
     protected $keyType = 'string';
     public $incrementing = false;
 
