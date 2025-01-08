@@ -37,6 +37,11 @@ class Room extends Model
         return $this->hasMany(EmployeeRoom::class, 'room_id');
     }
 
+    public function publicEmployees()
+    {
+        return $this->employees()->public();
+    }
+
     public function created_by()
     {
         return $this->belongsTo(Employee::class, 'created_by_id');

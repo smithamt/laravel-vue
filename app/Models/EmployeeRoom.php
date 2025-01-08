@@ -24,7 +24,13 @@ class EmployeeRoom extends Model
         'id' => 'string',
         'room_id' => 'string',
         'starting_date' => 'date',
+        'is_public' => 'boolean',
     ];
+
+    public function scopePublic($query)
+    {
+        return $query->where('is_public', true);
+    }
 
     public function employee()
     {

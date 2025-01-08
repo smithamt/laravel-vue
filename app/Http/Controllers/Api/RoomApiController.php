@@ -10,7 +10,12 @@ use App\Models\EmployeeRoom;
 use App\Models\Room;
 use Carbon\Carbon;
 use Dotenv\Exception\ValidationException;
+use Illuminate\Container\Attributes\Log;
+use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\Log as FacadesLog;
 use Illuminate\Validation\ValidationException as ValidationValidationException;
+
+use function Illuminate\Log\log;
 
 class RoomApiController extends Controller
 {
@@ -28,6 +33,14 @@ class RoomApiController extends Controller
         if ($request->has('hostel')) {
             $hostel_id = $request->input('hostel');
             $query->where('hostel_id', $hostel_id);
+        }
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($query) use ($search) {
+                $query->where('roomNumber', 'like', "%$search%");
+                // ->orWhere('description', 'like', "%$search%");
+            });
         }
 
         // Add public employee count
@@ -142,7 +155,7 @@ class RoomApiController extends Controller
         $room = Room::findOrFail($roomId);
         // Get the employees associated with the room
         $employees = $room->employees()->where('is_public', true)->with(['employee' => function ($query) {
-            $query->select('id', 'name')->with(['profile' => function ($query) {
+            $query->select('id', 'name', 'employee_id', 'nickname')->with(['profile' => function ($query) {
                 $query->select('image_id');
             }]);
         }])->paginate(10);
@@ -170,8 +183,10 @@ class RoomApiController extends Controller
         $room = Room::findOrFail($roomId);
 
         // Check if the room has enough capacity
-        $currentOccupancy = $room->employees()->count();
+        $currentOccupancy = $room->publicEmployees()->count();
         $newOccupancy = $currentOccupancy + count($employeeIds);
+
+        FacadesLog::error('error', ['total employee' => $currentOccupancy]);
 
         if ($newOccupancy > $room->capacity) {
             return response()->json(['error' => 'Room does not have enough capacity'], Response::HTTP_BAD_REQUEST);
@@ -207,7 +222,7 @@ class RoomApiController extends Controller
 
         $updatedEmployees = EmployeeRoom::where('room_id', $roomId)
             ->whereIn('id', $employeeIds)
-            ->with('employee:id,name')
+            ->with('employee:id,name,nickname,employee_id')
             ->get(['id', 'room_id', 'starting_date']);
 
         return response()->json($updatedEmployees);

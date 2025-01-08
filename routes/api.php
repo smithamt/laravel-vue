@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AppraisalApiController;
 use App\Http\Controllers\Api\AssetApiController;
 use App\Http\Controllers\Api\EmployeeApiController;
 use App\Http\Controllers\Api\HostelApiController;
+use App\Http\Controllers\Api\PositionApiController;
 use App\Http\Controllers\Api\RoomApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +33,8 @@ Route::middleware('api.emp.auth')->group(function () {
     Route::post('/rooms/{roomId}/add-employees', [RoomApiController::class, 'addEmployees']);
     Route::post('/rooms/{roomId}/add-employee', [RoomApiController::class, 'addEmployee']);
     Route::delete('/employee-rooms/{employeeRoomId}', [RoomApiController::class, 'removeEmployee']);
+
+    //positions
 });
+
+Route::apiResource('positions', PositionApiController::class);
